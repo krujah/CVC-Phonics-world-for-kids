@@ -2,6 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CVC Phonics — วิดีโอสอน</title>
 <style>
@@ -86,18 +87,10 @@ body {}
 .video-title { font-size:15px; font-weight:800; color:#185FA5; margin-bottom:.75rem; text-align:center; }
 
 /* Thumbnail + play button */
-.thumb-container { 
-  position:relative; width:100%; border-radius:10px; 
-  overflow:hidden; cursor:pointer; background:#000;
-  aspect-ratio:16/9;
-}
-.thumb-container img { 
-  width:100%; height:100%; 
-  object-fit:cover; display:block; 
-  opacity:0.9; transition:opacity .2s;
-}
 
-.thumb-container:hover img { opacity:0.75; }
+
+
+
 .play-btn { 
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   width:72px; height:72px; border-radius:50%;
@@ -106,7 +99,7 @@ body {}
   box-shadow:0 4px 20px rgba(0,0,0,.4);
   transition:transform .2s;
 }
-.thumb-container:hover .play-btn { transform:translate(-50%,-50%) scale(1.1); }
+
 .play-icon { font-size:30px; color:#fff; margin-left:5px; }
 
 /* Modal video */
@@ -127,16 +120,8 @@ body {}
   width:98vw; max-width:1000px;
   position:relative; padding-top:56.25%;
 }
-.modal-iframe-wrap iframe {
-  position:absolute; inset:0; width:100%; height:100%; border:none; border-radius:8px;
-}
-.open-yt-btn {
-  margin-top:16px;
-  background:rgba(255,255,255,.15); border:2px solid rgba(255,255,255,.4);
-  color:#fff; padding:10px 24px; border-radius:50px;
-  font-size:14px; font-weight:800; cursor:pointer;
-  font-family:'Nunito',sans-serif;
-}
+
+
 
 /* Adventure Background */
 body {
@@ -162,6 +147,37 @@ body::before {
   position: relative;
   z-index: 1;
 }
+
+
+
+
+
+
+
+
+
+
+.open-btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 #0C447C;}
+
+.video-card{background:#fff;border-radius:20px;border:3px solid #2E86FF;box-shadow:0 5px 0 #0C447C;padding:.75rem;margin-bottom:1rem;}
+.video-title{font-size:15px;font-weight:800;color:#185FA5;margin-bottom:.75rem;text-align:center;}
+.video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;background:#000;}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+
+.vthumb { position:relative; width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000; cursor:pointer; }
+.vthumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.vthumb-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+.vplay { width:70px; height:70px; border-radius:50%; background:rgba(46,134,255,0.95); display:flex; align-items:center; justify-content:center; font-size:28px; color:#fff; box-shadow:0 4px 20px rgba(0,0,0,0.4); }
+.vplay-text { font-size:13px; font-weight:800; color:#fff; background:rgba(0,0,0,0.5); padding:4px 14px; border-radius:20px; text-shadow:0 1px 4px rgba(0,0,0,0.8); }
+.vopen-btn { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:10px; padding:13px; border-radius:50px; border:none; background:linear-gradient(135deg,#2E86FF,#185FA5); color:#fff; font-size:15px; font-weight:900; cursor:pointer; font-family:'Nunito',sans-serif; box-shadow:0 4px 0 #0C447C; width:100%; transition:all .15s; }
+.vopen-btn:hover { transform:translateY(-2px); box-shadow:0 6px 0 #0C447C; }
+.vdesktop-wrap { display:none; position:relative; width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000; }
+.vdesktop-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
+@media(min-width:768px) {
+  .vthumb { display:none; }
+  .vopen-btn { display:none; }
+  .vdesktop-wrap { display:block; }
+}
 </style>
 </head>
 <body>
@@ -177,21 +193,24 @@ body::before {
 
   <div class="video-card">
     <div class="video-title">🎵 Phonics Song — CVC Words</div>
-    <div class="thumb-container" onclick="openVideo()">
-      <img src="https://drive.google.com/thumbnail?id=1de_gO6x8BRSKWmZPzKqInvyPtIZ5y7Fo&sz=w800" 
-           onerror="this.src='https://lh3.googleusercontent.com/drive-viewer/thumbnail'"
-           alt="Phonics Song thumbnail">
-      <div class="play-btn"><span class="play-icon">▶</span></div>
-    </div>
-  </div>
 
-  <!-- Modal -->
-  <div class="video-modal" id="videoModal">
-    <button class="modal-close" onclick="closeVideo()">✕</button>
-    <div class="modal-iframe-wrap">
-      <iframe id="driveFrame" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+    <!-- มือถือ: thumbnail + ปุ่มเปิด -->
+    <div class="vthumb" onclick="window.open('https://drive.google.com/file/d/1de_gO6x8BRSKWmZPzKqInvyPtIZ5y7Fo/view','_blank')">
+      <img src="https://drive.google.com/thumbnail?id=1de_gO6x8BRSKWmZPzKqInvyPtIZ5y7Fo&sz=w800" alt="Phonics Song"
+           onerror="this.style.display='none'">
+      <div class="vthumb-overlay">
+        <div class="vplay">▶</div>
+        <div class="vplay-text">▶ กดเพื่อดูวิดีโอ</div>
+      </div>
     </div>
-    <button class="open-yt-btn" onclick="window.open('https://drive.google.com/file/d/1de_gO6x8BRSKWmZPzKqInvyPtIZ5y7Fo/preview','_blank')">🔗 เปิดในหน้าต่างใหม่</button>
+    <button class="vopen-btn" onclick="window.open('https://drive.google.com/file/d/1de_gO6x8BRSKWmZPzKqInvyPtIZ5y7Fo/view','_blank')">
+      ▶️ กดดูวิดีโอ Phonics Song
+    </button>
+
+    <!-- คอมพิวเตอร์: iframe ฝังตรง -->
+    <div class="vdesktop-wrap">
+      <iframe src="https://drive.google.com/file/d/1de_gO6x8BRSKWmZPzKqInvyPtIZ5y7Fo/preview" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+    </div>
   </div>
 
   <div class="tips">
@@ -214,16 +233,6 @@ const VIDEO_ID = 'nHNC1cD7ahk';
 
 
 
-function openVideo(){
-  document.getElementById('driveFrame').src = 'https://drive.google.com/file/d/1de_gO6x8BRSKWmZPzKqInvyPtIZ5y7Fo/preview';
-  document.getElementById('videoModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeVideo(){
-  document.getElementById('driveFrame').src = '';
-  document.getElementById('videoModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
 
 function goHome(){
   const base = window.location.href.substring(0, window.location.href.lastIndexOf('/')+1);
@@ -232,5 +241,8 @@ function goHome(){
 
 
 </script>
+
+</div>
+
 </body>
 </html>
