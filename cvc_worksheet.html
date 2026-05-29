@@ -280,39 +280,7 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="tip-box">💡 หรือสร้างใบงานแบบ Interactive ด้านล่าง แล้วกด <strong>🖨️ พิมพ์ / บันทึก PDF</strong></div>
-  <!-- เลือกประเภทใบงาน -->
-  <div class="ws-grid" id="ws-selector">
-    <div class="ws-card active" onclick="selectWS(this,'full')" data-type="full">
-      <div class="ws-icon">📝</div>
-      <div class="ws-title">ใบงานครบชุด</div>
-      <div class="ws-desc">ฝึกเขียน เติมคำ โยงเส้น 4 แบบฝึกหัด</div>
-    </div>
-    <div class="ws-card" onclick="selectWS(this,'trace')" data-type="trace">
-      <div class="ws-icon">✏️</div>
-      <div class="ws-title">ฝึกเขียนตาม</div>
-      <div class="ws-desc">เห็นคำแล้วเขียนตาม เหมาะสำหรับเริ่มต้น</div>
-    </div>
-    <div class="ws-card" onclick="selectWS(this,'fill')" data-type="fill">
-      <div class="ws-icon">🔡</div>
-      <div class="ws-title">เติมตัวอักษร</div>
-      <div class="ws-desc">เห็นภาพแล้วเติมตัวอักษรที่หายไป</div>
-    </div>
-    <div class="ws-card" onclick="selectWS(this,'match')" data-type="match">
-      <div class="ws-icon">🔗</div>
-      <div class="ws-title">โยงเส้นจับคู่</div>
-      <div class="ws-desc">โยงเส้นจับคู่ภาพกับคำ</div>
-    </div>
-  </div>
-
-  <!-- เลือกสระ -->
-
-  <!-- ปุ่มพิมพ์ -->
-  <button class="print-btn" onclick="window.print()">🖨️ พิมพ์ใบงาน / บันทึกเป็น PDF</button>
-
-  <!-- Preview -->
-  <div id="ws-preview"></div>
-
+  
   <button class="home-btn" onclick="goHome()">🏠 กลับหน้าหลัก — CVC Phonics World</button>
 </div>
 
@@ -497,8 +465,9 @@ function wsFooter(v){
 }
 
 function renderPreview(){
-  const d=wsData[currentVowel];
   const preview=document.getElementById('ws-preview');
+  if(!preview) return;
+  const d=wsData[currentVowel];
   let content='';
 
   if(currentType==='full'){
