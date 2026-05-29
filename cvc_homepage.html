@@ -108,6 +108,7 @@ body {}
 .c-match{border-color:#20BF55;} .c-match .ch{background:linear-gradient(135deg,#20BF55,#0F6E56);} .c-match .cbtn{background:#20BF55;color:#fff;box-shadow:0 3px 0 #0F6E56;}
 .c-ws{border-color:#FF8C00;} .c-ws .ch{background:linear-gradient(135deg,#FF8C00,#CC6F00);} .c-ws .cbtn{background:#FF8C00;color:#fff;box-shadow:0 3px 0 #CC6F00;}
 .c-lesson{border-color:#FF4757;} .c-lesson .ch{background:linear-gradient(135deg,#FF4757,#C0000A);} .c-lesson .cbtn{background:#FF4757;color:#fff;box-shadow:0 3px 0 #8B0000;}
+.c-test{border-color:#4a0080;} .c-test .ch{background:linear-gradient(135deg,#4a0080,#9B59B6);} .c-test .cbtn{background:#4a0080;color:#fff;box-shadow:0 3px 0 #2d0060;}
 .c-about{border-color:#9B59B6;} .c-about .ch{background:linear-gradient(135deg,#9B59B6,#7D3C98);} .c-about .cbtn{background:#9B59B6;color:#fff;box-shadow:0 3px 0 #7D3C98;}
 
 /* HOWTO */
@@ -162,6 +163,28 @@ body::before {
   position: relative;
   z-index: 1;
 }
+
+/* Steps section */
+.steps-section{background:rgba(255,255,255,.08);border-radius:20px;padding:1rem;
+  margin-bottom:1.5rem;border:2px solid rgba(255,215,0,.3);backdrop-filter:blur(8px);}
+.steps-title{font-size:14px;font-weight:900;color:#FFD700;margin-bottom:.75rem;
+  display:flex;align-items:center;gap:6px;}
+.steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.step-item{display:flex;flex-direction:column;align-items:center;
+  cursor:pointer;transition:transform .15s;padding:4px 2px;}
+.step-item:hover{transform:translateY(-2px);}
+.step-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:16px;border:2px solid rgba(255,255,255,.3);
+  box-shadow:0 3px 0 rgba(0,0,0,.2);}
+.step-num{font-size:9px;font-weight:900;color:rgba(255,255,255,.7);margin-top:3px;text-align:center;}
+.step-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.9);margin-top:2px;
+  text-align:center;line-height:1.3;}
+.step-sub{font-size:8px;color:rgba(255,255,255,.6);text-align:center;margin-top:1px;}
+.step-arrow{display:none;}
+.step-highlight{animation:glow 2s ease-in-out infinite;}
+@keyframes glow{0%,100%{box-shadow:0 3px 0 rgba(0,0,0,.2),0 0 0 0 rgba(255,215,0,.4);}
+  50%{box-shadow:0 3px 0 rgba(0,0,0,.2),0 0 10px 3px rgba(255,215,0,.5);}}
+
 </style>
 </head>
 <body>
@@ -182,6 +205,86 @@ body::before {
 </div>
 
 <div class="main">
+
+
+  <!-- ลำดับการใช้สื่อ -->
+  <div class="steps-section">
+    <div class="steps-title">🗺️ ลำดับการใช้สื่อ CVC Phonics World</div>
+    <div class="steps-row">
+
+      <!-- 1. Pre-test -->
+      <div class="step-item" onclick="go('cvc_preposttest.html')">
+        <div class="step-circle step-highlight" style="background:linear-gradient(135deg,#2E86FF,#185FA5);">📝</div>
+        <div class="step-num">ขั้นที่ 1</div>
+        <div class="step-label">Pre-test</div>
+        <div class="step-sub">ทำก่อนเรียน</div>
+      </div>
+      <div class="step-arrow">▶</div>
+
+      <!-- 2. วิดีโอเพลง -->
+      <div class="step-item" onclick="go('cvc_video.html')">
+        <div class="step-circle" style="background:linear-gradient(135deg,#FF4757,#C0000A);">🎬</div>
+        <div class="step-num">ขั้นที่ 2</div>
+        <div class="step-label">วิดีโอเพลง</div>
+        <div class="step-sub">ฟังเพลง Phonics</div>
+      </div>
+      <div class="step-arrow">▶</div>
+
+      <!-- 3. ฝึกอ่าน -->
+      <div class="step-item" onclick="go('cvc_phonics_red_blue.html')">
+        <div class="step-circle" style="background:linear-gradient(135deg,#FF8C00,#CC6F00);">🔤</div>
+        <div class="step-num">ขั้นที่ 3</div>
+        <div class="step-label">ฝึกอ่าน CVC</div>
+        <div class="step-sub">ออกเสียงตัวอักษร</div>
+      </div>
+      <div class="step-arrow">▶</div>
+
+      <!-- 4. สะกดคำ -->
+      <div class="step-item" onclick="go('cvc_spelling.html')">
+        <div class="step-circle" style="background:linear-gradient(135deg,#9B59B6,#7D3C98);">✏️</div>
+        <div class="step-num">ขั้นที่ 4</div>
+        <div class="step-label">สะกดคำ</div>
+        <div class="step-sub">เรียงตัวอักษร</div>
+      </div>
+      <div class="step-arrow">▶</div>
+
+      <!-- 5. นิทาน -->
+      <div class="step-item" onclick="go('cvc_ebook.html')">
+        <div class="step-circle" style="background:linear-gradient(135deg,#2E86FF,#185FA5);">📖</div>
+        <div class="step-num">ขั้นที่ 5</div>
+        <div class="step-label">E-Book</div>
+        <div class="step-sub">อ่านนิทาน CVC</div>
+      </div>
+      <div class="step-arrow">▶</div>
+
+      <!-- 6. เกม -->
+      <div class="step-item" onclick="go('cvc_matching.html')">
+        <div class="step-circle" style="background:linear-gradient(135deg,#20BF55,#0F6E56);">🧩</div>
+        <div class="step-num">ขั้นที่ 6</div>
+        <div class="step-label">เกมจับคู่</div>
+        <div class="step-sub">ฝึกคำศัพท์</div>
+      </div>
+      <div class="step-arrow">▶</div>
+
+      <!-- 7. Quiz -->
+      <div class="step-item" onclick="go('cvc_quiz.html')">
+        <div class="step-circle" style="background:linear-gradient(135deg,#FF8C00,#CC6F00);">🎯</div>
+        <div class="step-num">ขั้นที่ 7</div>
+        <div class="step-label">Quiz</div>
+        <div class="step-sub">วัดผลระหว่างเรียน</div>
+      </div>
+      <div class="step-arrow">▶</div>
+
+      <!-- 8. Post-test -->
+      <div class="step-item" onclick="go('cvc_preposttest.html')">
+        <div class="step-circle step-highlight" style="background:linear-gradient(135deg,#9B59B6,#7D3C98);">🏆</div>
+        <div class="step-num">ขั้นที่ 8</div>
+        <div class="step-label">Post-test</div>
+        <div class="step-sub">ทำหลังเรียน</div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- สื่อการเรียนรู้ -->
   <div class="sec"><h2>📚 สื่อการเรียนรู้</h2></div>
@@ -231,6 +334,11 @@ body::before {
     <div class="card c-lesson" onclick="go('cvc_lessonplan.html')">
       <div class="ch"><span class="ctag">✅ พร้อมใช้</span><span class="ci">📋</span><div class="ct">แผนการสอน</div><div class="cs">Lesson Plan ครบถ้วน</div></div>
       <div class="cb"><div class="cd">แผนการจัดการเรียนรู้ มาตรฐาน วัตถุประสงค์ การวัดผล</div><div class="chips"><span class="chip">5 แผน</span><span class="chip">พิมพ์ PDF</span></div><button class="cbtn" onclick="event.stopPropagation();go('cvc_lessonplan.html')">📋 ดูแผนการสอน →</button></div>
+    </div>
+
+    <div class="card c-test" onclick="go('cvc_preposttest.html')">
+      <div class="ch"><span class="ctag">✅ พร้อมใช้</span><span class="ci">📝</span><div class="ct">Pre-test / Post-test</div><div class="cs">วัดผลก่อน-หลังเรียน</div></div>
+      <div class="cb"><div class="cd">แบบทดสอบ 20 ข้อ ครอบคลุมสระ a e i o u ดูรูปก่อนเรียน / ฟังเสียงหลังเรียน พร้อมดาวน์โหลด PDF</div><div class="chips"><span class="chip">20 ข้อ</span><span class="chip">5 สระ</span><span class="chip">ดาวน์โหลด PDF</span></div><button class="cbtn" onclick="event.stopPropagation();go('cvc_preposttest.html')">📝 ทำแบบทดสอบ →</button></div>
     </div>
 
     <div class="card c-about" onclick="go('cvc_about.html')">
