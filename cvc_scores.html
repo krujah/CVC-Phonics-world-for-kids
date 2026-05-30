@@ -274,6 +274,13 @@ function go(p){
 
 loadName();
 render();
+
+// อัปเดตคะแนนทุกครั้งที่กลับมาหน้านี้
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState === 'visible') render();
+});
+window.addEventListener('focus', render);
+window.addEventListener('pageshow', render);
 </script>
 </body>
 </html>
