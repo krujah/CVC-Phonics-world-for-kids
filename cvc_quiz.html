@@ -638,7 +638,7 @@ function nextQuestion(){
 }
 
 function showResult(){
-  saveScoreAuto("quiz_" + currentVowel, score, TOTAL);
+  saveScoreAuto("quiz_" + currentVowel, score, 10);
   document.getElementById('quiz-card').style.display='none';
   const rc=document.getElementById('result-card');
   rc.style.display='block';
