@@ -672,7 +672,7 @@ function updateDot(idx,cls){
 }
 
 function showResult(){
-  saveScoreAuto("spelling_" + currentVowel, score, TOTAL || 8);
+  saveScoreAuto("spelling_" + currentVowel, score, TOTAL=8);
   document.getElementById('game-card').style.display='none';
   document.getElementById('result-card').style.display='block';
   const pct=correctCount/questions.length;
