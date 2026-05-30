@@ -273,7 +273,7 @@ const PRE_Q = [
   {emoji:'🦇',word:'bat', vowel:'a',choices:['bat','bit','but','bet'],ans:0},
   {emoji:'🐀',word:'rat', vowel:'a',choices:['run','rot','rat','rut'],ans:2},
   // Short e (4 ข้อ)
-  {emoji:'✏️',word:'pen', vowel:'e',choices:['pan','pin','pun','pen'],ans:3},
+  {emoji:'🖊️',word:'pen', vowel:'e',choices:['pan','pin','pun','pen'],ans:3},
   {emoji:'🛏️',word:'bed', vowel:'e',choices:['bad','bid','bud','bed'],ans:3},
   {emoji:'🕸️',word:'web', vowel:'e',choices:['wab','wib','web','wub'],ans:2},
   {emoji:'🐔',word:'hen', vowel:'e',choices:['hen','han','hin','hun'],ans:0},
@@ -406,6 +406,7 @@ function answer(idx,btn,correct,word,vowel){
 }
 
 function showResult(){
+  saveScore(mode==='pre'?'pretest':'posttest', score, TOTAL);
   document.getElementById('quizWrap').classList.remove('active');
   document.getElementById('resultWrap').classList.add('active');
   const pct=score/TOTAL;
@@ -476,6 +477,25 @@ function goHome(){
   const b=window.location.href.substring(0,window.location.href.lastIndexOf('/')+1);
   window.location.href=b+'cvc_homepage.html';
 }
+
+// ===== บันทึกคะแนนลง localStorage =====
+}
+
+
+function saveScore(gameId, score, max) {
+  try {
+    const existing = localStorage.getItem('cvc_scores');
+    const scores = existing ? JSON.parse(existing) : {};
+    const d = new Date();
+    scores[gameId] = {
+      score: score,
+      max: max,
+      date: d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear(),
+    };
+    localStorage.setItem('cvc_scores', JSON.stringify(scores));
+  } catch(e) { console.log('save score error:', e); }
+}
+
 </script>
 </body>
 </html>
