@@ -327,6 +327,7 @@ body::before {
   <div class="progress-dots" id="progress-dots"></div>
 
   <div class="game-card" id="game-card">
+    <div id="img-area-wrap">
     <div class="img-area">
       <span class="word-emoji" id="word-emoji" onclick="playCurrentWord()" title="กดฟังเสียง">🐱</span>
       <div class="listen-hint">
@@ -334,6 +335,15 @@ body::before {
         กดภาพเพื่อฟังเสียงอีกครั้ง
         <span class="listen-ripple" style="animation-delay:.4s"></span>
       </div>
+    </div>
+    </div>
+    <div id="audio-only-wrap" style="display:none;text-align:center;padding:1rem 0;">
+      <button onclick="playCurrentWord()"
+        style="width:70px;height:70px;border-radius:50%;border:none;
+        background:linear-gradient(135deg,#4a0080,#9B59B6);font-size:28px;
+        cursor:pointer;box-shadow:0 4px 0 #2d0060;display:block;margin:0 auto 8px;">🔊</button>
+      <div style="font-size:12px;font-weight:700;color:#4a0080;">ฟังเสียงสะกด แล้วเลือกพยัญชนะ</div>
+      <div style="font-size:11px;color:#666;margin-top:3px;">✨ ถ้าถูกต้อง รูปจะปรากฏขึ้น!</div>
     </div>
 
     <div class="slots-area" id="slots-area"></div>
@@ -489,7 +499,14 @@ function loadQuestion(){
   answered=false; userAnswer=[];
   currentItem=questions[currentQ];
   shuffledLetters=makeLetterPool(currentItem.w);
+
+  // ซ่อนรูปไว้ก่อน — จะแสดงเมื่อตอบถูกเท่านั้น
+  const imgArea = document.getElementById('img-area-wrap');
+  const audioArea = document.getElementById('audio-only-wrap');
+  if(imgArea) imgArea.style.display = 'none';
+  if(audioArea) audioArea.style.display = 'block';
   document.getElementById('word-emoji').textContent=currentItem.e;
+
   document.getElementById('sc-q').textContent=`${currentQ+1}/${questions.length}`;
   document.getElementById('feedback').textContent='';
   document.getElementById('feedback').className='feedback';
@@ -498,8 +515,9 @@ function loadQuestion(){
   document.getElementById('game-card').style.borderColor=vowelColors[currentVowel];
   renderSlots();
   renderLetters();
-  // เล่นเสียงอัตโนมัติ
-  setTimeout(()=>playCurrentWord(),400);
+
+  // เล่นเสียงสะกด + อ่านคำอัตโนมัติทุกข้อ
+  setTimeout(()=>playCurrentWord(), 500);
 }
 
 function renderSlots(){
@@ -602,13 +620,18 @@ function checkAnswer(){
   const fb=document.getElementById('feedback');
 
   if(typed===correct){
-    // ถูก
+    // ถูก — แสดงรูป emoji
     correctCount++; score+=10;
     fb.textContent='🌟 ถูกต้อง! เก่งมาก!'; fb.className='feedback correct';
     for(let i=0;i<correct.length;i++){
       const slot=document.getElementById('slot-'+i);
       if(slot){slot.classList.add('correct-slot');}
     }
+    // แสดงรูปเมื่อตอบถูก
+    const imgArea = document.getElementById('img-area-wrap');
+    const audioArea = document.getElementById('audio-only-wrap');
+    if(imgArea){ imgArea.style.display='block'; }
+    if(audioArea){ audioArea.style.display='none'; }
     tts(correct,0.72);
     showCheer(true);
     updateDot(currentQ,'done-correct');
@@ -758,7 +781,7 @@ startGame();
 
 
 // ===== ระบบชื่อนักเรียน + ส่งคะแนน =====
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwtD4l3MKU1ev1QWMNpdizjZGNnt_CLw26bR3OmIvzsFSyDxMCMN9KwnAvmtbq3jSW3Sg/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyOPatBVhlj48fZ788CnOzNRqQXpb3zkJCpq62we3AmucLnin-IFE8my9RXEYYKoWYk/exec';
 const K_NAME = 'cvc_player_name';
 const K_SC   = 'cvc_scores';
 
